@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router";
 import Hamburger from "../assets/icon_hamburger_menu.svg";
+import basketIcon from "../assets/icon-basket.svg";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,6 +67,11 @@ export default function Header() {
           >
             <img src={Hamburger} alt="Hamburger Menu" />
           </button>
+
+          {/* Basket Icon (Visible on both desktop & mobile) */}
+          <Link to="/order" className="header-basket-link" aria-label="Shopping Cart">
+            <img src={basketIcon} alt="Basket" className="basket-icon" />
+          </Link>
         </nav>
       </div>
 
