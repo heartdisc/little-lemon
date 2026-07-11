@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import LoadingSpinner from './components/LoadingSpinner';
+import ScrollToTop from './components/ScrollToTop';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));
@@ -12,8 +13,6 @@ const Reservations = React.lazy(() => import('./pages/Reservations'));
 const Order = React.lazy(() => import('./pages/Order'));
 const Login = React.lazy(() => import('./pages/Login'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
-
-import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
