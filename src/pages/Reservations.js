@@ -1,34 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
+import BookingForm from "../components/BookingForm";
+
+export function initializeTimes() {
+  return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+}
+
+export function updateTimes(state, action) {
+  switch (action.type) {
+    case "UPDATE_TIMES":
+      // The instructions say "For now, the function can return the same availableTimes regardless of the date."
+      return initializeTimes();
+    default:
+      return state;
+  }
+}
 
 export default function Reservations() {
-  const [formData, setFormData] = useState({
-    date: "",
-    time: "18:00",
-    guests: "2",
-    occasion: "Birthday",
-    fullName: "",
-    email: "",
-    requests: "",
-  });
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("18:00");
+  const [guests, setGuests] = useState("1");
+  const [occasion, setOccasion] = useState("Birthday");
 
+  const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.date) newErrors.date = "Please select a date";
-    if (!formData.fullName.trim()) newErrors.fullName = "Please enter your name";
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email) {
-      newErrors.email = "Please enter your email";
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-
-    // Check if date is in the past
-    if (formData.date) {
-      const selectedDate = new Date(formData.date);
+    if (!date) {
+      newErrors.date = "Please select a date";
+    } else {
+      // Check if date is in the past
+      const selectedDate = new Date(date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       if (selectedDate < today) {
@@ -36,19 +39,41 @@ export default function Reservations() {
       }
     }
 
+    const parsedGuests = parseInt(guests);
+    if (!guests || isNaN(parsedGuests) || parsedGuests < 1 || parsedGuests > 10) {
+      newErrors.guests = "Number of guests must be between 1 and 10";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear error for that field
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
+  const handleDateChange = (newDate) => {
+    setDate(newDate);
+    dispatch({ type: "UPDATE_TIMES", date: newDate });
+    if (errors.date) {
+      setErrors((prev) => ({ ...prev, date: "" }));
+    }
+  };
+
+  const handleTimeChange = (newTime) => {
+    setTime(newTime);
+    if (errors.time) {
+      setErrors((prev) => ({ ...prev, time: "" }));
+    }
+  };
+
+  const handleGuestsChange = (newGuests) => {
+    setGuests(newGuests);
+    if (errors.guests) {
+      setErrors((prev) => ({ ...prev, guests: "" }));
+    }
+  };
+
+  const handleOccasionChange = (newOccasion) => {
+    setOccasion(newOccasion);
+    if (errors.occasion) {
+      setErrors((prev) => ({ ...prev, occasion: "" }));
     }
   };
 
@@ -59,12 +84,13 @@ export default function Reservations() {
     }
   };
 
-  const getMinDate = () => {
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
-    const yyyy = today.getFullYear();
-    return `${yyyy}-${mm}-${dd}`;
+  const resetForm = () => {
+    setDate("");
+    setTime("18:00");
+    setGuests("1");
+    setOccasion("Birthday");
+    setIsSubmitted(false);
+    setErrors({});
   };
 
   if (isSubmitted) {
@@ -77,30 +103,20 @@ export default function Reservations() {
           
           <div className="confirmation-details">
             <div className="detail-item">
-              <strong>Guest Name:</strong> <span>{formData.fullName}</span>
+              <strong>Date:</strong> <span>{date}</span>
             </div>
             <div className="detail-item">
-              <strong>Date:</strong> <span>{formData.date}</span>
+              <strong>Time:</strong> <span>{time}</span>
             </div>
             <div className="detail-item">
-              <strong>Time:</strong> <span>{formData.time}</span>
+              <strong>Number of Guests:</strong> <span>{guests} {parseInt(guests) === 1 ? 'person' : 'people'}</span>
             </div>
             <div className="detail-item">
-              <strong>Number of Guests:</strong> <span>{formData.guests} {parseInt(formData.guests) === 1 ? 'person' : 'people'}</span>
+              <strong>Occasion:</strong> <span>{occasion}</span>
             </div>
-            <div className="detail-item">
-              <strong>Occasion:</strong> <span>{formData.occasion}</span>
-            </div>
-            {formData.requests && (
-              <div className="detail-item requests-item">
-                <strong>Special Requests:</strong> <p>{formData.requests}</p>
-              </div>
-            )}
           </div>
           
-          <p className="confirmation-footer">A confirmation email has been sent to <strong>{formData.email}</strong>.</p>
-          
-          <button onClick={() => setIsSubmitted(false)} className="button-primary">
+          <button onClick={resetForm} className="button-primary">
             Book Another Table
           </button>
         </div>
@@ -125,127 +141,19 @@ export default function Reservations() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="reservation-form" noValidate>
-          <div className="form-group">
-            <label htmlFor="fullName">Full Name *</label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              placeholder="e.g. John Doe"
-              className={errors.fullName ? "input-error" : ""}
-              required
-            />
-            {errors.fullName && <span className="error-text">{errors.fullName}</span>}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email Address *</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="e.g. john@example.com"
-              className={errors.email ? "input-error" : ""}
-              required
-            />
-            {errors.email && <span className="error-text">{errors.email}</span>}
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="date">Choose Date *</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                min={getMinDate()}
-                value={formData.date}
-                onChange={handleChange}
-                className={errors.date ? "input-error" : ""}
-                required
-              />
-              {errors.date && <span className="error-text">{errors.date}</span>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="time">Choose Time *</label>
-              <select
-                id="time"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                required
-              >
-                <option value="17:00">5:00 PM</option>
-                <option value="17:30">5:30 PM</option>
-                <option value="18:00">6:00 PM</option>
-                <option value="18:30">6:30 PM</option>
-                <option value="19:00">7:00 PM</option>
-                <option value="19:30">7:30 PM</option>
-                <option value="20:00">8:00 PM</option>
-                <option value="20:30">8:30 PM</option>
-                <option value="21:00">9:00 PM</option>
-                <option value="21:30">9:30 PM</option>
-                <option value="22:00">10:00 PM</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="guests">Number of Guests *</label>
-              <select
-                id="guests"
-                name="guests"
-                value={formData.guests}
-                onChange={handleChange}
-                required
-              >
-                {[...Array(10).keys()].map((num) => (
-                  <option key={num + 1} value={num + 1}>
-                    {num + 1} {num + 1 === 1 ? "Guest" : "Guests"}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="occasion">Occasion</label>
-              <select
-                id="occasion"
-                name="occasion"
-                value={formData.occasion}
-                onChange={handleChange}
-              >
-                <option value="Birthday">Birthday</option>
-                <option value="Anniversary">Anniversary</option>
-                <option value="Engagement">Engagement</option>
-                <option value="Other">Other celebration</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="requests">Special Requests (Optional)</label>
-            <textarea
-              id="requests"
-              name="requests"
-              rows="3"
-              value={formData.requests}
-              onChange={handleChange}
-              placeholder="e.g. High chair for baby, quiet table, allergy alerts..."
-            />
-          </div>
-
-          <button type="submit" className="button-primary submit-btn">
-            Book Table
-          </button>
-        </form>
+        <BookingForm
+          date={date}
+          time={time}
+          guests={guests}
+          occasion={occasion}
+          onDateChange={handleDateChange}
+          onTimeChange={handleTimeChange}
+          onGuestsChange={handleGuestsChange}
+          onOccasionChange={handleOccasionChange}
+          availableTimes={availableTimes}
+          onSubmit={handleSubmit}
+          errors={errors}
+        />
       </div>
     </main>
   );
