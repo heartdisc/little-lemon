@@ -1,5 +1,5 @@
 import greekSalad from "../assets/foods/greek-salad.jpg";
-import bruchetta from "../assets/foods/bruchetta.svg";
+import bruchetta from "../assets/foods/bruchetta.jpg";
 import lemonDessert from "../assets/foods/lemon-dessert.jpg";
 import pasta from "../assets/foods/pasta.jpg";
 import grilledFish from "../assets/foods/grilled-fish.jpg";

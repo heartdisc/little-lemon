@@ -9,9 +9,12 @@ import Reservations from './pages/Reservations';
 import Order from './pages/Order';
 import Login from './pages/Login';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
