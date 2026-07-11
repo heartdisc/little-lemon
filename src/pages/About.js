@@ -42,7 +42,7 @@ export default function About() {
             </p>
           </div>
           <div className="about-story-image">
-            <img src={foundersImg} alt="Co-founders Mario and Adrian" />
+            <img src={foundersImg} alt="Co-founders Mario and Adrian" loading="lazy" />
           </div>
         </div>
       </section>
@@ -51,7 +51,7 @@ export default function About() {
       <section className="about-philosophy">
         <div className="container about-philosophy-content">
           <div className="about-philosophy-image">
-            <img src={chefImg} alt="Cooking fresh dishes" />
+            <img src={chefImg} alt="Cooking fresh dishes" loading="lazy" />
           </div>
           <div className="about-philosophy-text">
             <h3>Our Philosophy</h3>

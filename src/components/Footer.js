@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { navLinks } from "../data/navLinks";
 
 export default function Footer() {
   return (
@@ -16,12 +17,11 @@ export default function Footer() {
           <div className="footer-column">
             <h4>Navigation</h4>
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/menu">Menu</Link></li>
-              <li><Link to="/reservations">Reservations</Link></li>
-              <li><Link to="/order">Order Online</Link></li>
-              <li><Link to="/login">Login</Link></li>
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <Link to={link.path}>{link.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 

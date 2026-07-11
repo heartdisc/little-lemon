@@ -2,7 +2,6 @@
    Little Lemon CSS Design System
    ========================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Markazi+Text:wght@400..700&display=swap');
 
 :root {
   /* Primary Colors */
@@ -598,12 +597,16 @@ header nav .mobile-menu-toggle img {
   align-items: center;
 }
 
-.about-text h1 {
+.about-text h2 {
   color: var(--color-primary-yellow);
+  font-size: 4rem;
+  font-weight: 700;
 }
 
-.about-text h2 {
+.about-text h3 {
   color: var(--color-primary-green);
+  font-size: 2.5rem;
+  font-weight: 600;
   margin-top: -0.5rem;
   margin-bottom: 1.5rem;
 }
@@ -1230,7 +1233,7 @@ footer {
 }
 
 .item-detail-main-title {
-  font-family: var(--font-headings);
+  font-family: var(--font-display);
   font-size: 3rem;
   font-weight: 700;
   color: var(--color-highlight-dark);
@@ -1350,6 +1353,23 @@ footer {
   border-radius: 50%;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+input:focus-visible ~ .addon-right .circle-selector {
+  outline: 2px solid var(--color-primary-green);
+  outline-offset: 2px;
+}
+
 .item-detail-actions-wrapper {
   margin-top: 2.5rem;
   display: flex;
@@ -1463,10 +1483,10 @@ footer {
     padding: 1.25rem 1.5rem;
     box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
     z-index: 200;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    border-radius: 0;
+    border-radius: 16px 16px 0 0;
     margin-top: 0;
+    flex-direction: column;
+    gap: 0.5rem;
   }
   
   .quantity-selector {
@@ -1474,12 +1494,623 @@ footer {
     width: 100%;
   }
 
-  .item-detail-actions-wrapper {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .add-cart-btn {
     width: 100%;
   }
+}
+
+/* Loading Spinner Styles */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--color-highlight-light);
+  border-top-color: var(--color-primary-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================
+   RESERVATIONS PAGE STYLES
+   ========================================== */
+.reservation-page {
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.reservation-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.reservation-info h1 {
+  color: var(--color-primary-green);
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.reservation-intro {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.branch-info {
+  background-color: var(--color-highlight-light);
+  padding: 2rem;
+  border-radius: var(--radius-card);
+}
+
+.branch-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-highlight-dark);
+}
+
+.branch-info p {
+  margin-bottom: 0.5rem;
+  color: var(--color-highlight-dark);
+}
+
+.reservation-form {
+  background-color: var(--color-white);
+  padding: 2.5rem;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-highlight-dark);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.input-error {
+  border-color: #e53e3e !important;
+}
+
+.error-text {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+  font-weight: 600;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+/* Confirmation Card */
+.reservation-confirmation-page {
+  padding: 6rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.confirmation-card {
+  background-color: var(--color-white);
+  padding: 3rem 2rem;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-hover);
+  max-width: 550px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.confirmation-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+.confirmation-card h2 {
+  font-size: 2.5rem;
+  color: var(--color-primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.confirmation-subtitle {
+  color: var(--color-gray);
+  margin: 0 auto 2rem auto;
+}
+
+.confirmation-details {
+  background-color: var(--color-highlight-light);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+  padding-bottom: 0.5rem;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.requests-item {
+  flex-direction: column;
+}
+
+.requests-item p {
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+  color: var(--color-highlight-dark);
+}
+
+.confirmation-footer {
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-7px);
+  }
+}
+
+@media (max-width: 768px) {
+  .reservation-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .reservation-info {
+    text-align: center;
+  }
+  
+  .reservation-form {
+    padding: 1.5rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* ==========================================
+   ORDER PAGE STYLES
+   ========================================== */
+.order-page {
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.order-page h1 {
+  font-size: 3.5rem;
+  color: var(--color-primary-green);
+  margin-bottom: 2rem;
+}
+
+.order-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.basket-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-highlight-dark);
+}
+
+.basket-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.basket-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  background-color: var(--color-white);
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.basket-item-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.basket-item-info {
+  flex: 1;
+}
+
+.basket-item-info h3 {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-highlight-dark);
+  margin-bottom: 0.25rem;
+}
+
+.basket-item-desc {
+  font-size: 0.9rem;
+  color: var(--color-gray);
+  margin-bottom: 0.5rem;
+  max-width: 40ch;
+}
+
+.basket-item-price {
+  font-weight: 700;
+  color: var(--color-secondary-orange);
+}
+
+.basket-item-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-highlight-light);
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+}
+
+.quantity-controls button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--color-primary-green);
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.quantity-controls button:hover {
+  color: var(--color-primary-yellow);
+}
+
+.quantity-controls span {
+  font-weight: 700;
+  min-width: 15px;
+  text-align: center;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #e53e3e;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
+
+.checkout-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.summary-card,
+.payment-form {
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.summary-card h2,
+.payment-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-highlight-dark);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 0.75rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--color-highlight-dark);
+}
+
+.total-row {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--color-primary-green);
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.empty-cart-container {
+  text-align: center;
+  padding: 8rem 1.5rem;
+}
+
+.empty-cart-container h2 {
+  font-size: 2.5rem;
+  color: var(--color-primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.empty-cart-container p {
+  color: var(--color-gray);
+  margin: 0 auto;
+}
+
+/* Delivery Tracker animation */
+.delivery-tracker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2.5rem 0;
+}
+
+.tracker-stage {
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.stage-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-highlight-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 0.5rem auto;
+  border: 2px solid transparent;
+  transition: var(--transition-smooth);
+}
+
+.tracker-stage.active .stage-icon {
+  background-color: var(--color-primary-yellow);
+  border-color: var(--color-primary-green);
+  box-shadow: 0 0 10px rgba(244, 206, 20, 0.5);
+}
+
+.tracker-stage p {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-gray);
+}
+
+.tracker-stage.active p {
+  color: var(--color-primary-green);
+}
+
+.tracker-line {
+  height: 4px;
+  background-color: var(--color-highlight-light);
+  flex: 1;
+  max-width: 80px;
+  margin-top: -20px;
+  z-index: 1;
+}
+
+.delivery-time-estimate {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 992px) {
+  .order-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .basket-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .basket-item-desc {
+    margin: 0.5rem auto;
+  }
+  
+  .basket-item-actions {
+    align-items: center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  .tracker-line {
+    max-width: 40px;
+  }
+}
+
+/* ==========================================
+   LOGIN PAGE STYLES
+   ========================================== */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 4rem 1.5rem;
+}
+
+.login-card {
+  background-color: var(--color-white);
+  padding: 3rem 2.5rem;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-hover);
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.login-card h2 {
+  font-size: 2.5rem;
+  color: var(--color-primary-green);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+  color: var(--color-gray);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.remember-me input {
+  width: auto;
+}
+
+.forgot-password-link {
+  color: var(--color-primary-green);
+  font-weight: 700;
+  transition: var(--transition-smooth);
+}
+
+.forgot-password-link:hover {
+  color: var(--color-primary-yellow);
+  text-decoration: underline;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.toggle-auth-prompt {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: var(--color-highlight-dark);
+}
+
+.toggle-auth-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary-green);
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+  text-decoration: underline;
+}
+
+.toggle-auth-btn:hover {
+  color: var(--color-primary-yellow);
+}
+
+/* Success Login Card */
+.success-card {
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.success-actions .button-primary,
+.success-actions .button-secondary {
+  width: 100%;
+  max-width: 250px;
 }

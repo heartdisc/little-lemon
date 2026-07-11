@@ -55,7 +55,7 @@ export default function Menu() {
             {filteredItems.map((item) => (
               <article key={item.id} className="special-card">
                 <Link to={`/menu/${item.id}`} className="special-card-img-link">
-                  <img src={item.image} alt={item.title} className="special-card-img" />
+                  <img src={item.image} alt={item.title} className="special-card-img" loading="lazy" />
                 </Link>
                 <div className="special-card-body">
                   <div className="special-card-header">

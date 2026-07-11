@@ -18,7 +18,7 @@ export const menuItems = [
   },
   {
     id: 2,
-    title: "Bruchetta",
+    title: "Bruschetta",
     price: 9.99, // Base price 9.99 + 3 additions ($1 each) = $12.99 total in design mock
     category: "lunch",
     description: "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil. Topped with chopped tomatoes, oregano and fresh bazil.",

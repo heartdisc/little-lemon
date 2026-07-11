@@ -4,69 +4,11 @@ import marioA from "../assets/Mario-and-Adrian-A.jpg";
 import marioB from "../assets/Mario-and-Adrian-b.jpg";
 import { BikeIcon } from "../components/Icons";
 import { menuItems } from "../data/menuItems";
-
-// Custom offline-friendly Avatar component using initials and style colors
-function Avatar({ color, text }) {
-  return (
-    <svg 
-      viewBox="0 0 100 100" 
-      style={{ width: 50, height: 50, borderRadius: "50%", minWidth: 50 }}
-    >
-      <rect width="100" height="100" fill={color} />
-      <text 
-        x="50%" 
-        y="50%" 
-        dominantBaseline="central" 
-        textAnchor="middle" 
-        fill="#ffffff" 
-        fontSize="36" 
-        fontFamily="Karla" 
-        fontWeight="bold"
-      >
-        {text}
-      </text>
-    </svg>
-  );
-}
-
+import Avatar from "../components/Avatar";
+import { testimonials } from "../data/testimonials";
 
 export default function Home() {
   const specials = menuItems.filter((item) => item.isSpecial);
-
-  const testimonials = [
-    {
-      id: 1,
-      name: "Sara L.",
-      rating: "⭐⭐⭐⭐⭐",
-      avatarText: "SL",
-      avatarColor: "#495E57",
-      text: "Seriously the best Greek salad I've ever had! Fresh ingredients and authentic taste.",
-    },
-    {
-      id: 2,
-      name: "Mark K.",
-      rating: "⭐⭐⭐⭐⭐",
-      avatarText: "MK",
-      avatarColor: "#EE9972",
-      text: "The Bruschetta is simple but absolutely packed with flavor. The garlic olive oil blend is perfection.",
-    },
-    {
-      id: 3,
-      name: "Brandon O.",
-      rating: "⭐⭐⭐⭐⭐",
-      avatarText: "BO",
-      avatarColor: "#F4CE14",
-      text: "The atmosphere is warm, and the Lemon Dessert is out of this world. Highly recommend!",
-    },
-    {
-      id: 4,
-      name: "Selena G.",
-      rating: "⭐⭐⭐⭐⭐",
-      avatarText: "SG",
-      avatarColor: "#333333",
-      text: "Authentic Mediterranean recipes served with a modern twist. The service was top-notch.",
-    },
-  ];
 
   return (
     <main>
@@ -94,7 +36,7 @@ export default function Home() {
       <section className="specials">
         <div className="container">
           <div className="specials-header">
-            <h2>This weeks specials!</h2>
+            <h2>This week's specials!</h2>
             <Link to="/menu" className="button-primary">
               Online Menu
             </Link>
@@ -150,8 +92,8 @@ export default function Home() {
       <section className="about">
         <div className="container about-content">
           <div className="about-text">
-            <h1>Little Lemon</h1>
-            <h2>Chicago</h2>
+            <h2>Little Lemon</h2>
+            <h3>Chicago</h3>
             <p>
               Little Lemon is a charming neighborhood bistro that serves simple food and classic cocktails in a lively but casual environment. The restaurant features a locally-sourced menu with daily specials.
             </p>
@@ -160,8 +102,8 @@ export default function Home() {
             </p>
           </div>
           <div className="about-images">
-            <img src={marioA} alt="Mario and Adrian A" className="about-img-back" />
-            <img src={marioB} alt="Mario and Adrian B" className="about-img-front" />
+            <img src={marioA} alt="Mario and Adrian A" className="about-img-back" loading="lazy" />
+            <img src={marioB} alt="Mario and Adrian B" className="about-img-front" loading="lazy" />
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router";
 import Hamburger from "../assets/icon_hamburger_menu.svg";
 import basketIcon from "../assets/icon-basket.svg";
+import { navLinks } from "../data/navLinks";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,36 +27,17 @@ export default function Header() {
           
           {/* Desktop Nav */}
           <ul className="desktop-nav">
-            <li>
-              <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>
-                About
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")}>
-                Menu
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/reservations" className={({ isActive }) => (isActive ? "active" : "")}>
-                Reservations
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/order" className={({ isActive }) => (isActive ? "active" : "")}>
-                Order Online
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>
-                Login
-              </NavLink>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <NavLink 
+                  to={link.path} 
+                  end={link.end} 
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
 
           {/* Mobile Menu Toggle Button */}
@@ -93,36 +75,18 @@ export default function Header() {
           &times;
         </button>
         <ul>
-          <li>
-            <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")} onClick={closeMenu}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeMenu}>
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeMenu}>
-              Menu
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/reservations" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeMenu}>
-              Reservations
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeMenu}>
-              Order Online
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")} onClick={closeMenu}>
-              Login
-            </NavLink>
-          </li>
+          {navLinks.map((link) => (
+            <li key={link.path}>
+              <NavLink 
+                to={link.path} 
+                end={link.end} 
+                className={({ isActive }) => (isActive ? "active" : "")} 
+                onClick={closeMenu}
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </div>
     </header>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { DeliveryIcon } from "../components/Icons";
 import { menuItems } from "../data/menuItems";
@@ -18,10 +18,6 @@ export default function ItemDescription() {
 
   const item = menuItems.find((i) => i.id.toString() === itemId);
 
-  // Scroll to top on load
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   if (!item) {
     return (
@@ -83,37 +79,77 @@ export default function ItemDescription() {
           <section className="addons-section">
             <h3>Add</h3>
             
-            <div className="addon-row" onClick={() => toggleExtra("feta")}>
+            <label className="addon-row">
+              <input 
+                type="checkbox" 
+                checked={extras.feta} 
+                onChange={() => toggleExtra("feta")} 
+                className="visually-hidden"
+              />
               <span>Feta</span>
               <div className="addon-right">
                 <span className="addon-price">$1.00</span>
-                <span className={`circle-selector ${extras.feta ? "active" : ""}`} />
+                <span 
+                  className={`circle-selector ${extras.feta ? "active" : ""}`}
+                  role="checkbox"
+                  aria-checked={extras.feta}
+                />
               </div>
-            </div>
+            </label>
 
-            <div className="addon-row" onClick={() => toggleExtra("parmesan")}>
+            <label className="addon-row">
+              <input 
+                type="checkbox" 
+                checked={extras.parmesan} 
+                onChange={() => toggleExtra("parmesan")} 
+                className="visually-hidden"
+              />
               <span>Parmesan</span>
               <div className="addon-right">
                 <span className="addon-price">$1.00</span>
-                <span className={`circle-selector ${extras.parmesan ? "active" : ""}`} />
+                <span 
+                  className={`circle-selector ${extras.parmesan ? "active" : ""}`}
+                  role="checkbox"
+                  aria-checked={extras.parmesan}
+                />
               </div>
-            </div>
+            </label>
 
-            <div className="addon-row" onClick={() => toggleExtra("dressing")}>
+            <label className="addon-row">
+              <input 
+                type="checkbox" 
+                checked={extras.dressing} 
+                onChange={() => toggleExtra("dressing")} 
+                className="visually-hidden"
+              />
               <span>Dressing</span>
               <div className="addon-right">
                 <span className="addon-price">$1.00</span>
-                <span className={`circle-selector ${extras.dressing ? "active" : ""}`} />
+                <span 
+                  className={`circle-selector ${extras.dressing ? "active" : ""}`}
+                  role="checkbox"
+                  aria-checked={extras.dressing}
+                />
               </div>
-            </div>
+            </label>
 
-            <div className="addon-row" onClick={() => toggleExtra("raisins")}>
+            <label className="addon-row">
+              <input 
+                type="checkbox" 
+                checked={extras.raisins} 
+                onChange={() => toggleExtra("raisins")} 
+                className="visually-hidden"
+              />
               <span>Raisins</span>
               <div className="addon-right">
                 <span className="addon-price">$1.00</span>
-                <span className={`circle-selector ${extras.raisins ? "active" : ""}`} />
+                <span 
+                  className={`circle-selector ${extras.raisins ? "active" : ""}`}
+                  role="checkbox"
+                  aria-checked={extras.raisins}
+                />
               </div>
-            </div>
+            </label>
           </section>
 
           {/* Quantity selector & Add to cart button */}

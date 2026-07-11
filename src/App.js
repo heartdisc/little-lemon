@@ -1,13 +1,17 @@
+import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Home from './pages/Home';
-import About from './pages/About';
-import Menu from './pages/Menu';
-import ItemDescription from './pages/ItemDescription';
-import Reservations from './pages/Reservations';
-import Order from './pages/Order';
-import Login from './pages/Login';
+import LoadingSpinner from './components/LoadingSpinner';
+
+const Home = React.lazy(() => import('./pages/Home'));
+const About = React.lazy(() => import('./pages/About'));
+const Menu = React.lazy(() => import('./pages/Menu'));
+const ItemDescription = React.lazy(() => import('./pages/ItemDescription'));
+const Reservations = React.lazy(() => import('./pages/Reservations'));
+const Order = React.lazy(() => import('./pages/Order'));
+const Login = React.lazy(() => import('./pages/Login'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -16,15 +20,18 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/menu/:itemId" element={<ItemDescription />} />
-        <Route path="/reservations" element={<Reservations />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/menu/:itemId" element={<ItemDescription />} />
+          <Route path="/reservations" element={<Reservations />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </BrowserRouter>
   );
