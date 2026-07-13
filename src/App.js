@@ -12,6 +12,7 @@ const ItemDescription = React.lazy(() => import('./pages/ItemDescription'));
 const Reservations = React.lazy(() => import('./pages/Reservations'));
 const Order = React.lazy(() => import('./pages/Order'));
 const Login = React.lazy(() => import('./pages/Login'));
+const ConfirmedBooking = React.lazy(() => import('./pages/ConfirmedBooking'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/menu/:itemId" element={<ItemDescription />} />
           <Route path="/reservations" element={<Reservations />} />
+          <Route path="/booking-confirmed" element={<ConfirmedBooking />} />
           <Route path="/order" element={<Order />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />

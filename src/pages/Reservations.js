@@ -1,28 +1,68 @@
 import React, { useState, useReducer } from "react";
+import { useNavigate } from "react-router";
 import BookingForm from "../components/BookingForm";
 
+// Robust local fallback for fetchAPI and submitAPI in case the browser blocks
+// raw.githubusercontent.com due to MIME-type restrictions (X-Content-Type-Options: nosniff)
+const seededRandom = function (seed) {
+  var m = 2 ** 35 - 31;
+  var a = 185852;
+  var s = seed % m;
+  return function () {
+    return (s = (s * a) % m) / m;
+  };
+};
+
+const localFetchAPI = function (date) {
+  let result = [];
+  let random = seededRandom(date.getDate());
+
+  for (let i = 17; i <= 23; i++) {
+    if (random() < 0.5) {
+      result.push(i + ":00");
+    }
+    if (random() < 0.5) {
+      result.push(i + ":30");
+    }
+  }
+  return result;
+};
+
+const localSubmitAPI = function (formData) {
+  return true;
+};
+
+// Safe access helper
+const getFetchAPI = () => {
+  return (typeof window !== "undefined" && window.fetchAPI) || localFetchAPI;
+};
+
+const getSubmitAPI = () => {
+  return (typeof window !== "undefined" && window.submitAPI) || localSubmitAPI;
+};
+
 export function initializeTimes() {
-  return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  return getFetchAPI()(new Date());
 }
 
 export function updateTimes(state, action) {
   switch (action.type) {
     case "UPDATE_TIMES":
-      // The instructions say "For now, the function can return the same availableTimes regardless of the date."
-      return initializeTimes();
+      return getFetchAPI()(new Date(action.date));
     default:
       return state;
   }
 }
 
 export default function Reservations() {
+  const navigate = useNavigate();
+
   const [date, setDate] = useState("");
-  const [time, setTime] = useState("18:00");
+  const [time, setTime] = useState("");
   const [guests, setGuests] = useState("1");
   const [occasion, setOccasion] = useState("Birthday");
 
   const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
   const validate = () => {
@@ -77,52 +117,18 @@ export default function Reservations() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      setIsSubmitted(true);
+  const submitForm = (formData) => {
+    if (getSubmitAPI()(formData)) {
+      navigate("/booking-confirmed");
     }
   };
 
-  const resetForm = () => {
-    setDate("");
-    setTime("18:00");
-    setGuests("1");
-    setOccasion("Birthday");
-    setIsSubmitted(false);
-    setErrors({});
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      submitForm({ date, time, guests, occasion });
+    }
   };
-
-  if (isSubmitted) {
-    return (
-      <main className="reservation-confirmation-page container">
-        <div className="confirmation-card">
-          <div className="confirmation-icon">🍋</div>
-          <h2>Reservation Confirmed!</h2>
-          <p className="confirmation-subtitle">We look forward to welcoming you to Little Lemon.</p>
-          
-          <div className="confirmation-details">
-            <div className="detail-item">
-              <strong>Date:</strong> <span>{date}</span>
-            </div>
-            <div className="detail-item">
-              <strong>Time:</strong> <span>{time}</span>
-            </div>
-            <div className="detail-item">
-              <strong>Number of Guests:</strong> <span>{guests} {parseInt(guests) === 1 ? 'person' : 'people'}</span>
-            </div>
-            <div className="detail-item">
-              <strong>Occasion:</strong> <span>{occasion}</span>
-            </div>
-          </div>
-          
-          <button onClick={resetForm} className="button-primary">
-            Book Another Table
-          </button>
-        </div>
-      </main>
-    );
-  }
 
   return (
     <main className="reservation-page container">
@@ -130,7 +136,7 @@ export default function Reservations() {
         <div className="reservation-info">
           <h1>Reserve a Table</h1>
           <p className="reservation-intro">
-            Experience traditional Mediterranean recipes with a modern twist. 
+            Experience traditional Mediterranean recipes with a modern twist.
             Fill out the form to guarantee your seating at our Chicago branch.
           </p>
           <div className="branch-info">
