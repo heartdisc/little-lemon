@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Little Lemon Restaurant Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the **Little Lemon** restaurant web application, built as part of the Meta Front-End Developer Capstone Project. 
 
-## Available Scripts
+The application provides restaurant details, menu browsing, an interactive mock online order page, and a dynamic table reservation system integrated with an external API.
 
-In the project directory, you can run:
+---
+
+## 🚀 Key Features
+
+### 1. Table Reservation System
+*   **BookingForm & BookingPage**: Architecture split into a parent container component (`Reservations.js`) and a controlled child form component (`BookingForm.js`).
+*   **useReducer & Lifted State**: The `availableTimes` state is lifted to the page container and managed via a React `useReducer` hook.
+*   **API Integration**: Integrates with external `fetchAPI(date)` and `submitAPI(formData)` functions. Includes a **local fallback implementation** to ensure the app continues to operate flawlessly even if browsers block the external script due to MIME-type (`text/plain`) restrictions.
+*   **Confirmed Booking Page**: A dedicated confirmation route (`/booking-confirmed`) displays a success message upon submitting the reservation.
+
+### 2. Interactive Online Ordering
+*   **Dynamic Basket**: Customers can add items to their basket, dynamically adjust quantities, or remove items in real-time.
+*   **Auto Recalculation**: Subtotal, delivery fee ($5.00), sales tax (8%), and grand totals recalculate automatically.
+*   **Form Validation**: Checkout form validates credit card details (cardholder name, exactly 16-digit card number, valid MM/YY expiration format, and a 3-digit CVV).
+*   **Delivery Tracker**: Displays a visual status tracker (Confirmed, Preparing, On the Way) upon successful order placement.
+
+### 3. User Authentication Mockup
+*   Supports switching between login and registration panels with card-style styling.
+*   Performs form validation for email, password strength (minimum 6 characters), name, and matching passwords on signup.
+
+### 4. Accessibility & Performance Optimizations
+*   **Accessibility (a11y)**: Built using semantic HTML5 tags, proper heading hierarchy, matching `<label>` and `<input>` associations, and visible focus outlines for keyboard navigation.
+*   **Performance (Code Splitting)**: Leverages `React.lazy()` and `<Suspense>` to load pages on-demand, reducing the initial JS bundle size. Displays a custom, brand-themed loading spinner.
+*   **Lazy Loading Images**: Features `loading="lazy"` on all below-the-fold images to optimize page performance and bandwidth usage.
+
+---
+
+## 🛠️ Tech Stack
+
+*   **Core**: React 19, JavaScript (ES6+), HTML5
+*   **Styling**: Vanilla CSS (using CSS Custom Properties, Flexbox, Grid, and Keyframe animations)
+*   **Routing**: React Router v7/v8 (Client-side routing)
+*   **Testing**: Jest, React Testing Library (RTL)
+
+---
+
+## 💻 Getting Started
+
+You can run the following commands in the project directory:
+
+### `npm install`
+Installs all the required dependencies and node packages.
 
 ### `npm start`
-
-Runs the app in the development mode.\
+Runs the app in development mode.  
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode. This runs unit tests for components, helper functions, and the reservation time reducer.
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Builds the app for production to the `build` folder, optimising it for best performance.
