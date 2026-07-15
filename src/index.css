@@ -2114,3 +2114,280 @@ input:focus-visible ~ .addon-right .circle-selector {
   width: 100%;
   max-width: 250px;
 }
+
+/* ==========================================
+   IMPROVED 2-STEP RESERVATION STYLES
+   ========================================== */
+.brand-booking-wrapper {
+  background-color: var(--color-primary-green);
+  min-height: calc(100vh - 200px);
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: var(--color-white);
+  font-family: 'Karla', sans-serif;
+}
+
+.brand-booking-container {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-booking-header {
+  margin-bottom: 0.5rem;
+}
+
+.brand-booking-header .brand-title {
+  color: var(--color-primary-yellow);
+  font-family: 'Markazi Text', serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1;
+}
+
+.brand-booking-header .brand-subtitle {
+  color: var(--color-white);
+  font-family: 'Karla', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1;
+}
+
+.brand-section-heading h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+}
+
+.brand-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.brand-photo {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.brand-booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.brand-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.brand-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-wrapper,
+.input-wrapper {
+  background-color: var(--color-white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid transparent;
+  transition: var(--transition-smooth);
+}
+
+.select-wrapper:focus-within,
+.input-wrapper:focus-within {
+  border-color: var(--color-primary-yellow);
+}
+
+.select-wrapper select,
+.input-wrapper input,
+.input-wrapper textarea {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 0.85rem 1rem;
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-highlight-dark);
+  outline: none;
+}
+
+.input-wrapper input::placeholder,
+.input-wrapper textarea::placeholder {
+  color: #718096;
+  font-weight: 700;
+}
+
+.select-wrapper select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
+  padding-right: 2.5rem;
+}
+
+/* Custom styling for Date Input to look like a Select */
+.select-wrapper input[type="date"] {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--color-highlight-dark);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
+  padding-right: 2.5rem;
+}
+
+/* Password eye input row */
+.password-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-input-wrapper input {
+  padding-right: 3rem;
+}
+
+.password-toggle-btn {
+  background: none;
+  border: none;
+  color: #718096;
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle-btn:hover {
+  color: var(--color-highlight-dark);
+}
+
+.password-instruction {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  margin-top: 0.4rem;
+  font-weight: 400;
+}
+
+.brand-error-text {
+  color: #ff8a8a;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+  font-weight: 500;
+  display: block;
+}
+
+/* Seating Options Section */
+.seating-options-section {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.seating-options-section h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  color: var(--color-white);
+}
+
+.seating-option-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.seating-option-row:last-child {
+  border-bottom: none;
+}
+
+.seating-label {
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.seating-radio-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.seating-circle {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--color-white);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.seating-circle.active {
+  border-color: var(--color-primary-yellow);
+}
+
+.seating-circle.active::after {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-primary-yellow);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Yellow Button Styles */
+.brand-primary-btn {
+  background-color: var(--color-primary-yellow);
+  color: var(--color-highlight-dark);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: 'Karla', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.brand-primary-btn:hover {
+  background-color: #e0bd12;
+}
+
+.brand-primary-btn:active {
+  transform: scale(0.98);
+}
+
+.brand-action-wrapper {
+  margin-top: 1rem;
+}
