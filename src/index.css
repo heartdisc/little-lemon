@@ -677,6 +677,18 @@ footer {
   height: auto;
 }
 
+.footer-logo-link .logo-green {
+  display: none;
+}
+
+.footer-logo-link:hover .logo-yellow {
+  display: none;
+}
+
+.footer-logo-link:hover .logo-green {
+  display: inline-block;
+}
+
 .footer-column h4 {
   font-family: var(--font-body);
   font-size: 1rem;

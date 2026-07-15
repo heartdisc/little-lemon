@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router";
 import { navLinks } from "../data/navLinks";
 
@@ -8,8 +9,17 @@ export default function Footer() {
         <div className="footer-grid">
           {/* Column 1: Logo */}
           <div className="footer-logo">
-            <Link to="/">
-              <img src="/big-yellow-logo.png" alt="Little Lemon Logo" />
+            <Link to="/" className="footer-logo-link">
+              <img
+                src="/big-yellow-logo.png"
+                alt="Little Lemon Logo"
+                className="logo-yellow"
+              />
+              <img
+                src="/big-green-logo.png"
+                alt="Little Lemon Logo"
+                className="logo-green"
+              />
             </Link>
           </div>
 
