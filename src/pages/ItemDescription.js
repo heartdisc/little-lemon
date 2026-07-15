@@ -21,13 +21,13 @@ export default function ItemDescription() {
 
   if (!item) {
     return (
-      <div className="container" style={{ padding: "4rem 2rem", textAlign: "center" }}>
+      <main className="container" style={{ padding: "4rem 2rem", textAlign: "center" }}>
         <h2>Item Not Found</h2>
         <p>Sorry, the menu item you are looking for does not exist.</p>
         <Link to="/menu" className="button-primary" style={{ marginTop: "2rem" }}>
           Back to Menu
         </Link>
-      </div>
+      </main>
     );
   }
 
@@ -54,100 +54,114 @@ export default function ItemDescription() {
   };
 
   return (
-    <div className="item-detail-container container">
+    <main className="item-detail-container container">
       <div className="item-detail-layout">
         {/* Left Column: Image wrapper */}
         <div className="item-detail-image-wrapper">
-          <img src={item.image} alt={item.title} className="item-detail-main-image" />
+          <img src={item.image} alt={item.title} />
         </div>
 
-        {/* Right Column: Info details and purchasing */}
-        <div className="item-detail-info-wrapper">
-          <h1 className="item-detail-main-title">{item.title}</h1>
-          <p className="item-detail-main-desc">{item.description}</p>
+        {/* Right Column: Info & selection details */}
+        <div className="item-detail-info">
+          <h2>{item.title}</h2>
+          <p className="item-detail-desc">{item.description}</p>
+          <div className="item-detail-price">${basePrice.toFixed(2)}</div>
 
-          {/* Delivery Row */}
-          <div className="delivery-info-row">
-            <div className="delivery-info-left">
+          <div className="delivery-info">
+            <span className="delivery-icon-wrapper">
               <DeliveryIcon />
-              <span>Delivery time: <strong>{item.deliveryTime}</strong></span>
-            </div>
-            <button className="change-btn">Change</button>
+            </span>
+            <span className="delivery-text">Delivery time: 15-20 min</span>
           </div>
 
-          {/* Addons Section */}
           <section className="addons-section">
             <h3>Add</h3>
-            
-            <label className="addon-row">
-              <input 
-                type="checkbox" 
-                checked={extras.feta} 
-                onChange={() => toggleExtra("feta")} 
-                className="visually-hidden"
-              />
-              <span>Feta</span>
-              <div className="addon-right">
-                <span className="addon-price">$1.00</span>
-                <span 
-                  className={`circle-selector ${extras.feta ? "active" : ""}`}
+
+            {/* Addon 1: Feta */}
+            <label className="addon-row" htmlFor="addon-feta">
+              <div className="addon-left">
+                <input
+                  type="checkbox"
+                  id="addon-feta"
+                  className="visually-hidden"
+                  checked={extras.feta}
+                  onChange={() => toggleExtra("feta")}
+                />
+                <span
+                  className="circle-selector"
                   role="checkbox"
                   aria-checked={extras.feta}
-                />
+                ></span>
+                <span className="addon-name">Feta Cheese</span>
+              </div>
+              <div className="addon-right">
+                <span className="addon-price">+$1.00</span>
               </div>
             </label>
 
-            <label className="addon-row">
-              <input 
-                type="checkbox" 
-                checked={extras.parmesan} 
-                onChange={() => toggleExtra("parmesan")} 
-                className="visually-hidden"
-              />
-              <span>Parmesan</span>
-              <div className="addon-right">
-                <span className="addon-price">$1.00</span>
-                <span 
-                  className={`circle-selector ${extras.parmesan ? "active" : ""}`}
+            {/* Addon 2: Parmesan */}
+            <label className="addon-row" htmlFor="addon-parmesan">
+              <div className="addon-left">
+                <input
+                  type="checkbox"
+                  id="addon-parmesan"
+                  className="visually-hidden"
+                  checked={extras.parmesan}
+                  onChange={() => toggleExtra("parmesan")}
+                />
+                <span
+                  className="circle-selector"
                   role="checkbox"
                   aria-checked={extras.parmesan}
-                />
+                ></span>
+                <span className="addon-name">Parmesan Cheese</span>
+              </div>
+              <div className="addon-right">
+                <span className="addon-price">+$1.00</span>
               </div>
             </label>
 
-            <label className="addon-row">
-              <input 
-                type="checkbox" 
-                checked={extras.dressing} 
-                onChange={() => toggleExtra("dressing")} 
-                className="visually-hidden"
-              />
-              <span>Dressing</span>
-              <div className="addon-right">
-                <span className="addon-price">$1.00</span>
-                <span 
-                  className={`circle-selector ${extras.dressing ? "active" : ""}`}
+            {/* Addon 3: Dressing */}
+            <label className="addon-row" htmlFor="addon-dressing">
+              <div className="addon-left">
+                <input
+                  type="checkbox"
+                  id="addon-dressing"
+                  className="visually-hidden"
+                  checked={extras.dressing}
+                  onChange={() => toggleExtra("dressing")}
+                />
+                <span
+                  className="circle-selector"
                   role="checkbox"
                   aria-checked={extras.dressing}
-                />
+                ></span>
+                <span className="addon-name">Lemon Vinaigrette Dressing</span>
+              </div>
+              <div className="addon-right">
+                <span className="addon-price">+$1.00</span>
               </div>
             </label>
 
-            <label className="addon-row">
-              <input 
-                type="checkbox" 
-                checked={extras.raisins} 
-                onChange={() => toggleExtra("raisins")} 
-                className="visually-hidden"
-              />
-              <span>Raisins</span>
-              <div className="addon-right">
-                <span className="addon-price">$1.00</span>
-                <span 
-                  className={`circle-selector ${extras.raisins ? "active" : ""}`}
+            {/* Addon 4: Raisins */}
+            <label className="addon-row" htmlFor="addon-raisins">
+              <div className="addon-left">
+                <input
+                  type="checkbox"
+                  id="addon-raisins"
+                  className="visually-hidden"
+                  checked={extras.raisins}
+                  onChange={() => toggleExtra("raisins")}
+                />
+                <span
+                  className="circle-selector"
                   role="checkbox"
                   aria-checked={extras.raisins}
-                />
+                ></span>
+                <span className="addon-name">Raisins</span>
+              </div>
+              <div className="addon-right">
+                <span className="addon-price">+$1.00</span>
               </div>
             </label>
           </section>
@@ -165,6 +179,6 @@ export default function ItemDescription() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

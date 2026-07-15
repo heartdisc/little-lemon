@@ -42,6 +42,7 @@ export default function Menu() {
                   <button
                     className={`menu-tab-btn ${activeCategory === cat.id ? "active" : ""}`}
                     onClick={() => setActiveCategory(cat.id)}
+                    aria-pressed={activeCategory === cat.id}
                   >
                     {cat.label}
                   </button>

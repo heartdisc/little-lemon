@@ -29,9 +29,14 @@ export default function BookingForm({
           value={date}
           onChange={(e) => onDateChange(e.target.value)}
           className={errors.date ? "input-error" : ""}
+          aria-describedby={errors.date ? "date-error" : undefined}
           required
         />
-        {errors.date && <span className="error-text">{errors.date}</span>}
+        {errors.date && (
+          <span id="date-error" className="error-text" role="alert">
+            {errors.date}
+          </span>
+        )}
       </div>
 
       <div className="form-group">
@@ -41,6 +46,7 @@ export default function BookingForm({
           name="res-time"
           value={time}
           onChange={(e) => onTimeChange(e.target.value)}
+          aria-describedby={errors.time ? "time-error" : undefined}
           required
         >
           {availableTimes.map((t) => (
@@ -49,7 +55,11 @@ export default function BookingForm({
             </option>
           ))}
         </select>
-        {errors.time && <span className="error-text">{errors.time}</span>}
+        {errors.time && (
+          <span id="time-error" className="error-text" role="alert">
+            {errors.time}
+          </span>
+        )}
       </div>
 
       <div className="form-group">
@@ -64,9 +74,14 @@ export default function BookingForm({
           value={guests}
           onChange={(e) => onGuestsChange(e.target.value)}
           className={errors.guests ? "input-error" : ""}
+          aria-describedby={errors.guests ? "guests-error" : undefined}
           required
         />
-        {errors.guests && <span className="error-text">{errors.guests}</span>}
+        {errors.guests && (
+          <span id="guests-error" className="error-text" role="alert">
+            {errors.guests}
+          </span>
+        )}
       </div>
 
       <div className="form-group">
@@ -76,12 +91,17 @@ export default function BookingForm({
           name="occasion"
           value={occasion}
           onChange={(e) => onOccasionChange(e.target.value)}
+          aria-describedby={errors.occasion ? "occasion-error" : undefined}
           required
         >
           <option value="Birthday">Birthday</option>
           <option value="Anniversary">Anniversary</option>
         </select>
-        {errors.occasion && <span className="error-text">{errors.occasion}</span>}
+        {errors.occasion && (
+          <span id="occasion-error" className="error-text" role="alert">
+            {errors.occasion}
+          </span>
+        )}
       </div>
 
       <input
