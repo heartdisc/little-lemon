@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Column 1: Logo */}
           <div className="footer-logo">
             <Link to="/">
-              <img src="/logo.png" alt="Little Lemon Logo" />
+              <img src="/big-yellow-logo.png" alt="Little Lemon Logo" />
             </Link>
           </div>
 
