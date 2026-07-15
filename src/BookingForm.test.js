@@ -37,19 +37,19 @@ test("Renders the BookingForm heading/labels", () => {
   );
 
   // Check for the text/labels
-  const dateLabel = screen.getByText(/Choose date/i);
+  const dateLabel = screen.getByText(/Choose Date/i);
   expect(dateLabel).toBeInTheDocument();
 
-  const timeLabel = screen.getByText(/Choose time/i);
+  const timeLabel = screen.getByText(/Choose Time/i);
   expect(timeLabel).toBeInTheDocument();
 
-  const guestsLabel = screen.getByText(/Number of guests/i);
+  const guestsLabel = screen.getByText(/Number of Diners/i);
   expect(guestsLabel).toBeInTheDocument();
 
   const occasionLabel = screen.getByText(/Occasion/i);
   expect(occasionLabel).toBeInTheDocument();
 
-  const submitButton = screen.getByRole("button", { name: /Make Your reservation/i });
+  const submitButton = screen.getByRole("button", { name: /Lets go/i });
   expect(submitButton).toBeInTheDocument();
 });
 

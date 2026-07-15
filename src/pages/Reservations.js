@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { useNavigate } from "react-router";
+import BookingForm from "../components/BookingForm";
 
 // Robust local fallback for fetchAPI in case browser blocks external script
 const seededRandom = function (seed) {
@@ -119,118 +120,21 @@ export default function Reservations() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="reservation-form" noValidate>
-          {/* Date Selector */}
-          <div className="form-group">
-            <label htmlFor="res-date">Choose Date</label>
-            <input
-              type="date"
-              id="res-date"
-              value={date}
-              onChange={(e) => handleDateChange(e.target.value)}
-              className={errors.date ? "input-error" : ""}
-              required
-            />
-            {errors.date && (
-              <span id="date-error" className="error-text" role="alert">
-                {errors.date}
-              </span>
-            )}
-          </div>
-
-          {/* Time Selector */}
-          <div className="form-group">
-            <label htmlFor="res-time">Choose Time</label>
-            <select
-              id="res-time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className={errors.time ? "input-error" : ""}
-              required
-            >
-              <option value="" disabled>Select Time</option>
-              {availableTimes.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-            {errors.time && (
-              <span id="time-error" className="error-text" role="alert">
-                {errors.time}
-              </span>
-            )}
-          </div>
-
-          {/* Number of Diners (Guests) */}
-          <div className="form-group">
-            <label htmlFor="guests">Number of Diners</label>
-            <input
-              type="number"
-              id="guests"
-              min="1"
-              max="10"
-              placeholder="2"
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-              className={errors.guests ? "input-error" : ""}
-              required
-            />
-            {errors.guests && (
-              <span id="guests-error" className="error-text" role="alert">
-                {errors.guests}
-              </span>
-            )}
-          </div>
-
-          {/* Occasion Selector */}
-          <div className="form-group">
-            <label htmlFor="occasion">Occasion</label>
-            <select
-              id="occasion"
-              value={occasion}
-              onChange={(e) => setOccasion(e.target.value)}
-              required
-            >
-              <option value="Birthday">Birthday</option>
-              <option value="Anniversary">Anniversary</option>
-              <option value="Engagement">Engagement</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          {/* Seating Options */}
-          <div className="form-group">
-            <label>Seating Options</label>
-            <div style={{ display: "flex", gap: "20px", marginTop: "8px" }}>
-              <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "normal", cursor: "pointer" }}>
-                <input
-                  type="radio"
-                  name="seating"
-                  value="Standard"
-                  checked={seating === "Standard"}
-                  onChange={() => setSeating("Standard")}
-                />
-                Standard
-              </label>
-              <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "normal", cursor: "pointer" }}>
-                <input
-                  type="radio"
-                  name="seating"
-                  value="Outside"
-                  checked={seating === "Outside"}
-                  onChange={() => setSeating("Outside")}
-                />
-                Outside
-              </label>
-            </div>
-          </div>
-
-          {/* Lets go Button */}
-          <button type="submit" className="button-primary submit-btn">
-            Lets go
-          </button>
-        </form>
+        <BookingForm
+          date={date}
+          time={time}
+          guests={guests}
+          occasion={occasion}
+          seating={seating}
+          onDateChange={handleDateChange}
+          onTimeChange={setTime}
+          onGuestsChange={setGuests}
+          onOccasionChange={setOccasion}
+          onSeatingChange={setSeating}
+          availableTimes={availableTimes}
+          onSubmit={handleSubmit}
+          errors={errors}
+        />
       </div>
     </main>
   );

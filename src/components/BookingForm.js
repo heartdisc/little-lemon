@@ -5,10 +5,12 @@ export default function BookingForm({
   time,
   guests,
   occasion,
+  seating,
   onDateChange,
   onTimeChange,
   onGuestsChange,
   onOccasionChange,
+  onSeatingChange,
   availableTimes = [],
   onSubmit,
   errors = {},
@@ -20,8 +22,9 @@ export default function BookingForm({
       className="reservation-form"
       noValidate
     >
+      {/* Date Selector */}
       <div className="form-group">
-        <label htmlFor="res-date">Choose date</label>
+        <label htmlFor="res-date">Choose Date</label>
         <input
           type="date"
           id="res-date"
@@ -39,16 +42,19 @@ export default function BookingForm({
         )}
       </div>
 
+      {/* Time Selector */}
       <div className="form-group">
-        <label htmlFor="res-time">Choose time</label>
+        <label htmlFor="res-time">Choose Time</label>
         <select
           id="res-time"
           name="res-time"
           value={time}
           onChange={(e) => onTimeChange(e.target.value)}
+          className={errors.time ? "input-error" : ""}
           aria-describedby={errors.time ? "time-error" : undefined}
           required
         >
+          <option value="" disabled>Select Time</option>
           {availableTimes.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -62,15 +68,16 @@ export default function BookingForm({
         )}
       </div>
 
+      {/* Number of Diners (Guests) */}
       <div className="form-group">
-        <label htmlFor="guests">Number of guests</label>
+        <label htmlFor="guests">Number of Diners</label>
         <input
           type="number"
-          placeholder="1"
-          min="1"
-          max="10"
           id="guests"
           name="guests"
+          min="1"
+          max="10"
+          placeholder="2"
           value={guests}
           onChange={(e) => onGuestsChange(e.target.value)}
           className={errors.guests ? "input-error" : ""}
@@ -84,6 +91,7 @@ export default function BookingForm({
         )}
       </div>
 
+      {/* Occasion Selector */}
       <div className="form-group">
         <label htmlFor="occasion">Occasion</label>
         <select
@@ -96,6 +104,8 @@ export default function BookingForm({
         >
           <option value="Birthday">Birthday</option>
           <option value="Anniversary">Anniversary</option>
+          <option value="Engagement">Engagement</option>
+          <option value="Other">Other</option>
         </select>
         {errors.occasion && (
           <span id="occasion-error" className="error-text" role="alert">
@@ -104,9 +114,37 @@ export default function BookingForm({
         )}
       </div>
 
+      {/* Seating Options */}
+      <div className="form-group">
+        <label>Seating Options</label>
+        <div style={{ display: "flex", gap: "20px", marginTop: "8px" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "normal", cursor: "pointer" }}>
+            <input
+              type="radio"
+              name="seating"
+              value="Standard"
+              checked={seating === "Standard"}
+              onChange={() => onSeatingChange("Standard")}
+            />
+            Standard
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "normal", cursor: "pointer" }}>
+            <input
+              type="radio"
+              name="seating"
+              value="Outside"
+              checked={seating === "Outside"}
+              onChange={() => onSeatingChange("Outside")}
+            />
+            Outside
+          </label>
+        </div>
+      </div>
+
+      {/* Submit / Lets go Button */}
       <input
         type="submit"
-        value="Make Your reservation"
+        value="Lets go"
         className="button-primary submit-btn"
         style={{ marginTop: "10px" }}
       />
