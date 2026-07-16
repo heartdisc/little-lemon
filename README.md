@@ -1,6 +1,6 @@
 # Little Lemon Restaurant Web Application
 
-This is the **Little Lemon** restaurant web application, built as part of the Meta Front-End Developer Capstone Project. 
+This is the **Little Lemon** restaurant web application, built as part of the Meta Front-End Developer Capstone Project.
 
 The application provides restaurant details, menu browsing, an interactive mock online order page, and a dynamic table reservation system integrated with an external API.
 
@@ -48,7 +48,7 @@ You can run the following commands in the project directory:
 Installs all the required dependencies and node packages.
 
 ### `npm start`
-Runs the app in development mode.  
+Runs the app in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
